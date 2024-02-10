@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Viewer</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/free-vector/watercolor-weather-effects-collection_23-2149115331.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: 'Poppins', sans-serif; /* Use Poppins font */
+            color: black;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1, h2, h3, p, li {
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weather Viewer</h1>
+    <form method="post">
+        <label for="city">Enter City:</label>
+        <input type="text" id="city" name="city" required>
+        <button type="submit">Get Weather</button>
+    </form>
+    
+    {% if temperature and wind and description %}
+        <h2>Current Weather in {{ city }}</h2>
+        <p>Temperature: {{ temperature }}</p>
+        <p>Wind Speed: {{ wind }}</p>
+        <p>Description: {{ description }}</p>
+        <h3>3-Day Forecast</h3>
+        <ul>
+            {% for day in forecast %}
+                <li>Day {{ day.day }}: Temperature {{ day.temperature }}, Wind {{ day.wind }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Failed to retrieve weather data for {{ city }}</p>
+    {% endif %}
+</body>
+</html>
